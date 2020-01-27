@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Das 'Lazy Observer' Projekt</h1>
+
+<p>Willkommen! Dies ist eine kleine Webapplikation zum generieren von Hospitationsprotokollen für die Beobachtung von Unterricht. Wenn Ihr einen Hopitationsbogen generieren wollt, klickt oben in der Navigation auf den entsprechenden Link.</p>
+
+<h2>Warum dieses Projekt?</h2>
+
+<p>Da an meiner Schule <var>Python</var> unterrichtet wird, wollte ich meine Kenntnisse etwas auffrischen und war auf der Suche nach einem keinen Projekt. Dies ist das Ergebnis.</p>
+
+<h2>Wie hast Du das gemacht?</h2>
+
+<p>Die Idee hatte ich selber. Zum lernen bin ich <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world"> diesem Tutorial von Miguel Grinberg</a> (letzter Abruf am 27.01.2020) gefolgt. Das Ergebnis <a href="https://github.com/fgrng"> könnt Ihr auf Github finden</a>.</p>
+
+<h2>Woher stammen die Indikatoren für die Hospitationsprotokolle?</h2>
+
+<p>
+    Die Indikatoren sind dem Artikel <a href="https://doi.org/10.1007/s11858-018-0918-4">Generic dimensions of teaching quality: the German framework of Three Basic Dimensions</a> von Anna-Katharina Praetorius, Eckhard Klieme, Benjamin Herbert und Petra Pinger entnommen.
+</p>
+
+<p>Quellenangabe:</p>
+
+<code>
+Praetorius, A., Klieme, E., Herbert, B. et al. Generic dimensions of teaching
+quality: the German framework of Three Basic Dimensions. ZDM Mathematics
+Education 50, 407–426 (2018). <a>https://doi.org/10.1007/s11858-018-0918-4</a>
+</code>
+
+<h2>Was steht hier in der Datenbank?</h2>
+
+{% for d in dims %}
+<h3>{{d.name}}<h3>
+    {% for s in d.subdimensions.all() %}
+    <h4>{{s.name}}</h4>
+    <ul>
+        {% for c in s.indicators.all() %}
+        <li>{{c.criteria}}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Neue Daten einreichen</h1>
+<form action="indicator" method="post" novalidate>
+    {{ form_ind.hidden_tag() }}
+    <p>
+        {{ form_ind.subd.label }}<br>
+        {{ form_ind.subd() }}
+        {% for error in form_ind.subd.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form_ind.criteria.label }}<br>
+        {{ form_ind.criteria() }}
+        {% for error in form_ind.criteria.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form_ind.submit() }}</p>
+</form>
+
+<hr>
+
+<form action="subdimension" method="post" novalidate>
+    {{ form_subd.hidden_tag() }}
+    <p>
+        {{ form_subd.dim.label }}<br>
+        {{ form_subd.dim() }}
+        {% for error in form_subd.dim.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form_subd.name.label }}<br>
+        {{ form_subd.name() }}
+        {% for error in form_subd.name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form_subd.submit() }}</p>
+</form>
+{% endblock %}

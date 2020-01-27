@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>The Lazy Observer - Protokollgenerator für Unterrichtsbeobachtungen</title>
+    </head>
+    <body>
+        <div>
+            The Lazy Observer:
+            <a href="{{ url_for('sheet') }}">Beobachtungsprotokoll erstellen</a>
+            &middot;
+            <a href="{{ url_for('submit') }}">Indikator einreichen</a>
+            &middot;
+            <a href="{{ url_for('index') }}">Über diese Seite</a>
+        </div>
+
+        <hr>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </body>
+</html>

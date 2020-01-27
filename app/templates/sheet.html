@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Generate Observer Sheet</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.subd_1.label }}<br>
+        {{ form.subd_1() }}
+        {% for error in form.subd_1.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.subd_2.label }}<br>
+        {{ form.subd_2() }}
+        {% for error in form.subd_2.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.random() }} {{ form.random.label }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
