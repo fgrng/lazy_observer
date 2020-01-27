@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Generate Observer Sheet</h1>
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.subd_1.label }}<br>
-        {{ form.subd_1() }}
-        {% for error in form.subd_1.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.subd_2.label }}<br>
-        {{ form.subd_2() }}
-        {% for error in form.subd_2.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.random() }} {{ form.random.label }}</p>
-    <p>{{ form.submit() }}</p>
-</form>
+<h1>Zufällige Beobachtungsaspekte</h1>
+
+<p>Wenn Du heute Unterrichts beobachtest, könnstest du auf die folgenden zwei Aspekte achten.</p>
+
+<ol>
+    <li>
+        Der Aspekt <strong>{{subdim1.name}}</strong> gehört zur Basisdimension „{{dim1.name}}“. Achte auf die folgenden Kriterien:
+        <ul>
+            {% for c in subdim1.indicators.all() %}
+            <li>{{c.criteria}}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li>
+        Der Aspekt <strong>{{subdim2.name}}</strong> gehört zur Basisdimension „{{dim2.name}}“. Achte auf die folgenden Kriterien:
+        <ul>
+            {% for c in subdim2.indicators.all() %}
+            <li>{{c.criteria}}</li>
+            {% endfor %}
+        </ul>
+    </li>
+</ol>
 {% endblock %}

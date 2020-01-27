@@ -1,6 +1,7 @@
 ## The routes are the different URLs that the application implements.
 ##   Route handlers are written as python functions (view functions).
 import logging
+import random
 
 ## Import 'render_template' to use flasks HTML template engine.
 from flask import render_template, flash, redirect, url_for
@@ -12,21 +13,25 @@ from app.models import Dimension, Subdimension, Indicator
 ## Import form classes.
 from app.forms import RequestSheetForm, CreateIndicatorForm, CreateSubdimensionForm
 
-## (1) View function: index
 ## Decorators (@app) modifies the function follows (index()).
 ## Associate the 'index()' view function with URLs '/' and '/index'
+## View function to generate an observer sheet.
 @app.route('/')
 @app.route('/index')
+@app.route('/sheet', methods=['GET', 'POST'])
+def sheet():
+    subdims = Subdimension.query.all()
+    subdim1 = random.choice(subdims)
+    subdim2 = random.choice(subdims)
+    dim1 = subdim1.dimension
+    dim2 = subdim2.dimension
+    return render_template('sheet.html', subdim1=subdim1, subdim2=subdim2, dim1=dim1, dim2=dim2)
+
+
 @app.route('/about')
 def index():
     dims = Dimension.query.all()
     return render_template('index.html', dims=dims)
-
-## View function to generate an observer sheet.
-@app.route('/sheet', methods=['GET', 'POST'])
-def sheet():
-    form=RequestSheetForm()
-    return render_template('sheet.html', form=form)
 
 ## View function to submit new indicator for observation.
 @app.route('/submit', methods=['GET'])
